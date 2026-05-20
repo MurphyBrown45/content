@@ -18,5 +18,5 @@
 
      afplay <audiofile> -- plays audio without any screen popup (mac)
 
-     sudo
+     sudo shutdown -h now -- shutdowns device (mac)
      
