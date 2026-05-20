@@ -1,5 +1,5 @@
 # Hello
 
-<img src="images.png">
+<img src="images/angry_bird.png">
 
 # Angry Bir
