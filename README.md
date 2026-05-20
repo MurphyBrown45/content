@@ -16,7 +16,9 @@
 
      osascript -e 'display alert "alert title" message "alert message"' -- displays an alert (mac)
 
-     afplay <audiofile> -- plays audio without any screen popup (mac)
+     afplay <audiofile> -- plays audio from terminal (doesn't show up on the computer) does however still play sound on their computer
 
      sudo shutdown -h now -- shutdowns device (mac)
+
+     running programs.py -- hernia opens photo of SH/HK and poop plays the same fart sound over and over whilst also turning the volume to 100
      
