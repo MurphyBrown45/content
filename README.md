@@ -1,6 +1,6 @@
 
-# Hello
- nice terminal information:
+# Read
+ terminal commands:
 
      start <folder/filename> -- open files(windows)-works for audio, images, or md/txt
 
