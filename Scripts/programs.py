@@ -11,10 +11,14 @@ time.sleep(20)
 
 #if you enter 'poop' it constantly sets volume to max and also constantly plays the fart sound effect from repository
 if uiprogram == "poop":
+    for j in range(1):
+        
     pyautogui.write("cd content")
-    time.sleep(1)
     pyautogui.press('enter')
+    time.sleep(5)
+    
     for i in range(count):
+        
         pyautogui.write("osascript -e \"set volume output volume 100\"")
         pyautogui.press('enter')
         pyautogui.write("afplay Audio/Fart.mp3")
@@ -22,13 +26,11 @@ if uiprogram == "poop":
 
 #hernia opens henrys photo
 if uiprogram == "hernia":
-    pyautogui.write("cd content")
-    time.sleep(1)
-    pyautogui.press('enter')
-    for i in range(count):
-        pyautogui.write("start images/hernia.jpg")
+    for j in range(1):
+        pyautogui.write("cd content")
         pyautogui.press('enter')
-
-
-        
+        time.sleep(5)
     
+    for i in range(count):
+        pyautogui.write("cmd /c start images/hernia.jpg")
+        pyautogui.press('enter')
