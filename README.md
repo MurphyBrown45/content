@@ -2,7 +2,7 @@
 # Hello
  nice terminal openning information:
 
-     start <folder/filename> -- opens   files(windows)-works for audio, images, or md/txt
+     start <folder/filename> -- open files(windows)-works for audio, images, or md/txt
 
      git clone https://github.com/MurphyBrown45/content.git -- copies this repository to device
 
