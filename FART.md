@@ -1,3 +1,3 @@
 # shelly
 
-<img src="images - Copy (69).jpg">
+<img src="images/Shelly.jpg">
