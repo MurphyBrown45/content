@@ -7,7 +7,7 @@ uiprogram = input("what program do you want to run?: ")
 uicount = input("and for how long?: ")
 count = int(uicount)
 #sleep so you can focus on terminal
-time.sleep(20)
+time.sleep(10)
 
 #if you enter 'poop' it constantly sets volume to max and also constantly plays the fart sound effect from repository
 if uiprogram == "poop":
@@ -17,7 +17,7 @@ if uiprogram == "poop":
     pyautogui.press('enter')
     time.sleep(5)
     
-    for i in range(count):
+    for i in range(count, interval=0.5):
         
         pyautogui.write("osascript -e \"set volume output volume 100\"")
         pyautogui.press('enter')
@@ -31,6 +31,6 @@ if uiprogram == "hernia":
         pyautogui.press('enter')
         time.sleep(5)
     
-    for i in range(count):
+    for i in range(count, interval=0.5):
         pyautogui.write("cmd /c start images/hernia.jpg")
         pyautogui.press('enter')
