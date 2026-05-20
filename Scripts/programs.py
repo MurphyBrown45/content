@@ -17,11 +17,13 @@ if uiprogram == "poop":
     pyautogui.press('enter')
     time.sleep(5)
     
-    for i in range(count, interval=0.5):
+    for i in range(count):
         
         pyautogui.write("osascript -e \"set volume output volume 100\"")
         pyautogui.press('enter')
+        time.sleep(0.1)
         pyautogui.write("afplay Audio/Fart.mp3")
+        time.sleep(0.1)
         pyautogui.press('enter')
 
 #hernia opens henrys photo
