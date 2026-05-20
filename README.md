@@ -1,6 +1,6 @@
 
 # Hello
- nice terminal openning information:
+ nice terminal information:
 
      start <folder/filename> -- open files(windows)-works for audio, images, or md/txt
 
