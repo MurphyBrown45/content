@@ -34,8 +34,6 @@ for programs.py here are some PCP commands:
 
      allofit -- opens most of all the photos
 
-     crash -- crashes computer (mac)
-
      dysentary -- plays both fart sounds at the same time
 
      shelly -- opens Shelly.jpg
