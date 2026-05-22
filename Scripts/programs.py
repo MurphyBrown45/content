@@ -1,149 +1,181 @@
-import pyautogui
 import time
 import tkinter as tk
+import os
+import shutil
+import subprocess
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def _find_git_bash():
+    bash_path = shutil.which("bash")
+    if bash_path:
+        return bash_path
+
+    candidates = [
+        r"C:\Program Files\Git\bin\bash.exe",
+        r"C:\Program Files (x86)\Git\bin\bash.exe",
+        r"C:\Program Files\Git\usr\bin\bash.exe",
+        r"C:\Program Files (x86)\Git\usr\bin\bash.exe",
+    ]
+    for path in candidates:
+        if os.path.isfile(path):
+            return path
+    return None
+
+GIT_BASH = _find_git_bash()
+_bash_process = None
+
+
+def _ensure_bash():
+    global _bash_process
+    if _bash_process and _bash_process.poll() is None:
+        return _bash_process
+    if not GIT_BASH:
+        return None
+
+    creationflags = subprocess.CREATE_NEW_CONSOLE if os.name == "nt" else 0
+    _bash_process = subprocess.Popen(
+        [GIT_BASH, "--login", "-i"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        text=True,
+        creationflags=creationflags,
+    )
+    time.sleep(0.5)
+    return _bash_process
+
+
+def _run(command):
+    if not command:
+        return 0
+
+    if GIT_BASH:
+        proc = _ensure_bash()
+        if proc and proc.stdin:
+            proc.stdin.write(command + "\n")
+            proc.stdin.flush()
+            return 0
+
+    return os.system(command)
+
+
+def _cd_content():
+    if GIT_BASH:
+        _run("cd content")
+    else:
+        os.chdir(os.path.join(BASE_DIR, "content"))
+
+
+def _open(path):
+    if GIT_BASH:
+        _run(f'cmd.exe /C start "" "{path}"')
+    else:
+        os.system(f'start "" "{path}"')
+
+
+def _play_audio(path):
+    _open(path)
 
 
 def poop(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _run("")
         time.sleep(1)
 
     for _ in range(count):
-        pyautogui.write("osascript -e \"set volume output volume 100\"")
-        pyautogui.press('enter')
-        pyautogui.write("afplay Audio/Fart.mp3")
-        pyautogui.press('enter')
+        _run('echo "set volume output volume 100"')
+        _play_audio("Audio/Fart.mp3")
         time.sleep(0.5)
 
 
 def hernia(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
         time.sleep(3)
 
     for _ in range(count):
-        pyautogui.write("cmd /c start images/hernia.jpg")
-        pyautogui.press('enter')
+        _open("images/hernia.jpg")
 
 
 def alert(count):
     for _ in range(count):
-        pyautogui.write("osascript -e 'display alert \"virus detected\" message \"your computer has virus\"'")
-        pyautogui.press('enter')
+        _run('cmd.exe /C msg * "virus detected: your computer has virus"')
         time.sleep(1)
 
-    pyautogui.write("osascript -e 'display alert \"too many virus\" message \"shutting down\"'")
-    pyautogui.press('enter')
-    pyautogui.write("sudo shutdown -h now")
-    pyautogui.press('enter')
+    _run('cmd.exe /C msg * "too many virus: shutting down"')
+    _run('cmd.exe /C shutdown -s -t 0')
 
 
 def allofit(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
 
     for _ in range(count):
-        pyautogui.write("start images/gabbs.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/gerny.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/realistic_angry_bird.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/angry_bird_3.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/brods.jpg")
-        pyautogui.press('enter')
+        _open("images/gabbs.jpg")
+        _open("images/gerny.jpg")
+        _open("images/realistic_angry_bird.jpg")
+        _open("images/angry_bird_3.jpg")
+        _open("images/brods.jpg")
 
 
 def crash(count):
     for _ in range(1):
-        pyautogui.write("osascript -e 'display alert \"Your computer has a virus\" message \"shutting down \"'")
-        pyautogui.press('enter')
+        _run('cmd.exe /C msg * "Your computer has a virus: shutting down"')
 
-        pyautogui.write("sudo shutdown -h now")
-        pyautogui.press('enter')
+        _run('cmd.exe /C shutdown -s -t 0')
 
 
 def dysentery(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
 
     for _ in range(count):
-        pyautogui.write("osascript -e \"set volume output volume 100\"")
-        pyautogui.press('enter')
-
-        pyautogui.write("afplay Audio/Fart.mp3")
-        pyautogui.press('enter')
-
-        pyautogui.write("afplay Audio/beanfrong.mp3")
-        pyautogui.press('enter')
+        _run('echo "set volume output volume 100"')
+        _play_audio("Audio/Fart.mp3")
+        _play_audio("Audio/beanfrong.mp3")
         time.sleep(0.5)
 
 
 def shelly(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
 
     for _ in range(count):
-        pyautogui.write("start images/Shelly.jpg")
-        pyautogui.press('enter')
+        _open("images/Shelly.jpg")
 
 
 def poopwin(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
         time.sleep(2)
 
     for _ in range(count):
-        pyautogui.write("start Audio/Fart.mp3")
-        pyautogui.press('enter')
+        _open("Audio/Fart.mp3")
         time.sleep(7)
 
 
 def sutwin(count):
     for _ in range(1):
-        pyautogui.write("cmd /c shutdown -s -t 0")
-        pyautogui.press('enter')
+        _run("cmd /c shutdown -s -t 0")
 
 
 def bswin(count):
     for _ in range(1):
-        pyautogui.write("cd content")
-        pyautogui.press('enter')
+        _cd_content()
 
     for _ in range(count):
-        pyautogui.write("start images/gerny.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/gabbs.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/hernia.jpg")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/angry_bird.png")
-        pyautogui.press('enter')
-
-        pyautogui.write("start images/curiouskirk.jpg")
-        pyautogui.press('enter')
+        _open("images/gerny.jpg")
+        _open("images/gabbs.jpg")
+        _open("images/hernia.jpg")
+        _open("images/angry_bird.png")
+        _open("images/curiouskirk.jpg")
 
     for _ in range(count):
-        pyautogui.write("start Audio/Fart.mp3")
-        pyautogui.press('enter')
+        _open("Audio/Fart.mp3")
         time.sleep(1)
-
-        pyautogui.write("start Audio/beanfrong.mp3")
-        pyautogui.press('enter')
+        _open("Audio/beanfrong.mp3")
         time.sleep(1)
 
 
