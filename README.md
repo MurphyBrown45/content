@@ -20,6 +20,29 @@
 
      sudo shutdown -h now -- shutdowns device (mac)
 
-     running programs.py -- hernia opens photo of SH/HK and poop plays the same fart sound over and over whilst also turning the volume to 100
+
      
-# chur
+# programs
+PCP commands:
+
+     poop -- plays fart sounds
+
+     hernia -- opens photo of kirk
+
+     alert -- screen alert (not working!)
+
+     allofit -- opens most of all the photos
+
+     crash -- crashes computer (mac)
+
+     dysentary -- plays both fart sounds at the same time
+
+     shelly -- opens Shelly.jpg
+
+     poopwin -- fart sound (for windows)
+
+     shutwin -- shuts down a windows computer after 20 seconds (includes countdown)
+
+     bswin -- opens a bunch of bullshit for windows (most of the photos and the farts)
+
+     
