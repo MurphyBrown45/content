@@ -1,12 +1,15 @@
+
 import time
 import tkinter as tk
 import os
 import shutil
 import subprocess
+from tkinter import ttk
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
+#paths to gitbash
 def _find_git_bash():
     bash_path = shutil.which("bash")
     if bash_path:
@@ -104,9 +107,6 @@ def alert(count):
         _run('cmd.exe /C msg * "virus detected: your computer has virus"')
         time.sleep(1)
 
-    _run('cmd.exe /C msg * "too many virus: shutting down"')
-    _run('cmd.exe /C shutdown -s -t 0')
-
 
 def allofit(count):
     for _ in range(1):
@@ -156,9 +156,28 @@ def poopwin(count):
         time.sleep(7)
 
 
-def sutwin(count):
-    for _ in range(1):
-        _run("cmd /c shutdown -s -t 0")
+def shutwin(count):
+    countdown_seconds = 20
+    shutdown_window = tk.Toplevel(root)
+    shutdown_window.title("Shutdown Countdown")
+    shutdown_window.geometry("320x100")
+    shutdown_window.resizable(False, False)
+    shutdown_window.transient(root)
+
+    timer_label = tk.Label(shutdown_window, text=f"Shutting down in {countdown_seconds} seconds...", font=("Arial", 14))
+    timer_label.pack(expand=True, padx=10, pady=15)
+
+    def update_timer():
+        nonlocal countdown_seconds
+        if countdown_seconds <= 0:
+            timer_label.config(text="Shutting down now...")
+            return
+        timer_label.config(text=f"Shutting down in {countdown_seconds} seconds...")
+        countdown_seconds -= 1
+        root.after(1000, update_timer)
+
+    _run("cmd /c shutdown -s -t 20")
+    update_timer()
 
 
 def bswin(count):
@@ -171,12 +190,13 @@ def bswin(count):
         _open("images/hernia.jpg")
         _open("images/angry_bird.png")
         _open("images/curiouskirk.jpg")
+        _open("images/Shelly.jpg")
 
     for _ in range(count):
         _open("Audio/Fart.mp3")
-        time.sleep(1)
+        time.sleep(7)
         _open("Audio/beanfrong.mp3")
-        time.sleep(1)
+        time.sleep(3)
 
 
 def get_count():
@@ -202,7 +222,20 @@ def update_count_label(*args):
 
 
 root = tk.Tk()
-root.title('Program Control Panel')
+root.title('PCP')
+style = ttk.Style()
+style.theme_use("clam")
+
+style.configure("Poop.TButton", background = "blue", font = ("Arial", 12))  
+style.configure("Hernia.TButton", background = "green", font = ("Arial", 12))
+style.configure("Alert.TButton", background = "blue", font = ("Arial", 12))
+style.configure("AllOfIt.TButton", background = "green", font = ("Arial", 12))
+style.configure("Crash.TButton", background = "green", font = ("Arial", 12))
+style.configure("Dysentery.TButton", background = "blue", font = ("Arial", 12))
+style.configure("Shelly.TButton", background = "green", font = ("Arial", 12))
+style.configure("PoopWin.TButton", background = "green", font = ("Arial", 12))
+style.configure("ShutWin.TButton", background = "red", font = ("Arial", 12))
+style.configure("BSWin.TButton", background = "green", font = ("Arial", 12))
 
 count_var = tk.StringVar(value='1')
 
@@ -215,7 +248,7 @@ count_label.pack(side='left')
 count_entry = tk.Entry(count_frame, textvariable=count_var, width=5)
 count_entry.pack(side='left', padx=(5, 0))
 
-current_count_label = tk.Label(count_frame, text='Current count: 1')
+current_count_label = tk.Label(count_frame)
 current_count_label.pack(side='left', padx=(15, 0))
 
 count_var.trace_add('write', update_count_label)
@@ -224,20 +257,20 @@ button_frame = tk.Frame(root)
 button_frame.pack(padx=10, pady=10)
 
 buttons = [
-    ('poop', lambda: poop(get_count())),
-    ('hernia', lambda: hernia(get_count())),
-    ('alert', lambda: alert(get_count())),
-    ('allofit', lambda: allofit(get_count())),
-    ('crash', lambda: crash(get_count())),
-    ('dysentery', lambda: dysentery(get_count())),
-    ('shelly', lambda: shelly(get_count())),
-    ('poopwin', lambda: poopwin(get_count())),
-    ('sutwin', lambda: sutwin(get_count())),
-    ('bswin', lambda: bswin(get_count())),
+    ('poop', lambda: poop(get_count()), 'Poop.TButton'),
+    ('hernia', lambda: hernia(get_count()), 'Hernia.TButton'),
+    ('alert', lambda: alert(get_count()), 'Alert.TButton'),
+    ('allofit', lambda: allofit(get_count()), 'AllOfIt.TButton'),
+    ('crash', lambda: crash(get_count()), 'Crash.TButton'),
+    ('dysentery', lambda: dysentery(get_count()), 'Dysentery.TButton'),
+    ('shelly', lambda: shelly(get_count()), 'Shelly.TButton'),
+    ('poopwin', lambda: poopwin(get_count()), 'PoopWin.TButton'),
+    ('shutwin', lambda: shutwin(get_count()), 'ShutWin.TButton'),
+    ('bswin', lambda: bswin(get_count()), 'BSWin.TButton'),
 ]
 
-for text, action in buttons:
-    btn = tk.Button(button_frame, text=text, width=20, command=action)
+for text, action, style_name in buttons:
+    btn = ttk.Button(button_frame, text=text, width=20, command=action, style=style_name)
     btn.pack(pady=2)
 
 root.mainloop()
