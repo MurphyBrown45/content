@@ -23,7 +23,8 @@
 
      
 # programs
-PCP commands:
+for programs.py here are some PCP commands:
+(note: make sure count is atleast 2, the first count is what opens the gitbash terminal)
 
      poop -- plays fart sounds
 
