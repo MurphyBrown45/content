@@ -119,14 +119,6 @@ def allofit(count):
         _open("images/angry_bird_3.jpg")
         _open("images/brods.jpg")
 
-
-def crash(count):
-    for _ in range(1):
-        _run('cmd.exe /C msg * "Your computer has a virus: shutting down"')
-
-        _run('cmd.exe /C shutdown -s -t 0')
-
-
 def dysentery(count):
     for _ in range(1):
         _cd_content()
@@ -230,7 +222,6 @@ style.configure("Poop.TButton", background = "blue", font = ("Arial", 12))
 style.configure("Hernia.TButton", background = "green", font = ("Arial", 12))
 style.configure("Alert.TButton", background = "blue", font = ("Arial", 12))
 style.configure("AllOfIt.TButton", background = "green", font = ("Arial", 12))
-style.configure("Crash.TButton", background = "green", font = ("Arial", 12))
 style.configure("Dysentery.TButton", background = "blue", font = ("Arial", 12))
 style.configure("Shelly.TButton", background = "green", font = ("Arial", 12))
 style.configure("PoopWin.TButton", background = "green", font = ("Arial", 12))
@@ -261,7 +252,6 @@ buttons = [
     ('hernia', lambda: hernia(get_count()), 'Hernia.TButton'),
     ('alert', lambda: alert(get_count()), 'Alert.TButton'),
     ('allofit', lambda: allofit(get_count()), 'AllOfIt.TButton'),
-    ('crash', lambda: crash(get_count()), 'Crash.TButton'),
     ('dysentery', lambda: dysentery(get_count()), 'Dysentery.TButton'),
     ('shelly', lambda: shelly(get_count()), 'Shelly.TButton'),
     ('poopwin', lambda: poopwin(get_count()), 'PoopWin.TButton'),
